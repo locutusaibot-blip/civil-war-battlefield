@@ -27,9 +27,10 @@ func spawn_armies() -> void:
 	var player_units: Array[BaseUnit] = []
 	var enemy_units: Array[BaseUnit] = []
 
-	# Union (player) — right side, vertical column
-	var u_infantry = spawn_unit(INFANTRY_SCENE, $UnionArmy, Vector2(UNION_X, CENTER_Y), "union")
-	var u_cavalry = spawn_unit(CAVALRY_SCENE, $UnionArmy, Vector2(UNION_X, CENTER_Y - SPACING), "union")
+	# Union (player) — right side
+	# Cavalry=front (closest to center), Infantry=middle, Artillery=rear (near edge)
+	var u_cavalry = spawn_unit(CAVALRY_SCENE, $UnionArmy, Vector2(UNION_X - 2 * SPACING, CENTER_Y - SPACING), "union")
+	var u_infantry = spawn_unit(INFANTRY_SCENE, $UnionArmy, Vector2(UNION_X - SPACING, CENTER_Y), "union")
 	var u_artillery = spawn_unit(ARTILLERY_SCENE, $UnionArmy, Vector2(UNION_X, CENTER_Y + SPACING), "union")
 
 	# Order matches 1/2/3 keys: infantry, cavalry, artillery
@@ -37,9 +38,10 @@ func spawn_armies() -> void:
 	player_units.append(u_cavalry)
 	player_units.append(u_artillery)
 
-	# Confederate (AI) — left side, vertical column
-	var c_infantry = spawn_unit(INFANTRY_SCENE, $ConfederateArmy, Vector2(CONF_X, CENTER_Y), "confederate")
-	var c_cavalry = spawn_unit(CAVALRY_SCENE, $ConfederateArmy, Vector2(CONF_X, CENTER_Y - SPACING), "confederate")
+	# Confederate (AI) — left side
+	# Cavalry=front (closest to center), Infantry=middle, Artillery=rear (near edge)
+	var c_cavalry = spawn_unit(CAVALRY_SCENE, $ConfederateArmy, Vector2(CONF_X + 2 * SPACING, CENTER_Y - SPACING), "confederate")
+	var c_infantry = spawn_unit(INFANTRY_SCENE, $ConfederateArmy, Vector2(CONF_X + SPACING, CENTER_Y), "confederate")
 	var c_artillery = spawn_unit(ARTILLERY_SCENE, $ConfederateArmy, Vector2(CONF_X, CENTER_Y + SPACING), "confederate")
 
 	enemy_units.append(c_infantry)

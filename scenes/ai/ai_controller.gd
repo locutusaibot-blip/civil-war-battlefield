@@ -38,7 +38,7 @@ func evaluate_unit(unit: BaseUnit) -> AIState:
 	# Low health: retreat (unless enemy is very close)
 	if unit.health < unit.max_health * 0.3:
 		var nearest = unit.find_nearest_enemy()
-		if nearest and unit.global_position.distance_to(nearest.global_position) < 60:
+		if nearest and unit.global_position.distance_to(nearest.global_position) < unit.detection_radius:
 			return AIState.ENGAGE
 		return AIState.RETREAT
 

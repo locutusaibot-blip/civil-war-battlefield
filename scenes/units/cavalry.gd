@@ -6,6 +6,7 @@ const CHARGE_COOLDOWN: float = 3.0
 
 var charge_available: bool = true
 var charge_timer: float = 0.0
+var in_contact: bool = false
 
 func _ready():
 	unit_type = "cavalry"
@@ -20,8 +21,9 @@ func _physics_process(delta):
 	if not is_alive:
 		return
 
-	# Charge cooldown
-	if not charge_available:
+	# Charge cooldown — only ticks when NOT in contact with enemy
+	in_contact = is_in_melee_contact()
+	if not charge_available and not in_contact:
 		charge_timer -= delta
 		if charge_timer <= 0:
 			charge_available = true
@@ -33,6 +35,13 @@ func _physics_process(delta):
 
 	apply_charge_damage(delta)
 	move_and_slide()
+
+func is_in_melee_contact() -> bool:
+	for body in detection_area.get_overlapping_bodies():
+		if body is BaseUnit and body.team != team and body.is_alive:
+			if global_position.distance_to(body.global_position) < 40:
+				return true
+	return false
 
 func apply_charge_damage(delta):
 	for body in detection_area.get_overlapping_bodies():
