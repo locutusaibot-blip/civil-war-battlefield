@@ -1,24 +1,24 @@
 [gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scenes/units/artillery.gd" id="1"]
+[ext_resource type="Script" path="res://scenes/units/artillery.gd" id="1_7y2w5"]
+[ext_resource type="Texture2D" uid="uid://a3k9m5x2w8p7" path="res://assets/sprites/artillery_union.png" id="2_9k4lm"]
 
-[sub_resource type="RectangleShape2D" id="body_shape"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dyaiv"]
 size = Vector2(32, 32)
 
-[sub_resource type="CircleShape2D" id="detect_shape"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_8h0e6"]
 radius = 400.0
 
 [node name="Artillery" type="CharacterBody2D"]
 collision_layer = 1
 collision_mask = 1
-script = ExtResource("1")
+script = ExtResource("1_7y2w5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("body_shape")
+shape = SubResource("RectangleShape2D_dyaiv")
 
-[node name="Sprite" type="Polygon2D" parent="."]
-color = Color(0.2, 0.4, 0.8, 1)
-polygon = PackedVector2Array(16, 0, 11.3, 11.3, 0, 16, -11.3, 11.3, -16, 0, -11.3, -11.3, 0, -16, 11.3, -11.3)
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_9k4lm")
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -26,14 +26,6 @@ collision_mask = 1
 monitoring = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-shape = SubResource("detect_shape")
-
-[node name="Label" type="Label" parent="."]
-offset_left = -16.0
-offset_top = -24.0
-offset_right = 16.0
-offset_bottom = -8.0
-horizontal_alignment = 1
-text = "ART"
+shape = SubResource("CircleShape2D_8h0e6")
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

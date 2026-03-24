@@ -4,6 +4,10 @@ const INFANTRY_SCENE = preload("res://scenes/units/infantry.tscn")
 const CAVALRY_SCENE = preload("res://scenes/units/cavalry.tscn")
 const ARTILLERY_SCENE = preload("res://scenes/units/artillery.tscn")
 
+const CONF_INFANTRY_SCENE = preload("res://scenes/units/infantry_confederate.tscn")
+const CONF_CAVALRY_SCENE = preload("res://scenes/units/cavalry_confederate.tscn")
+const CONF_ARTILLERY_SCENE = preload("res://scenes/units/artillery_confederate.tscn")
+
 @onready var game_manager: Node = $GameManager
 @onready var hud: CanvasLayer = $HUD
 
@@ -40,17 +44,13 @@ func spawn_armies() -> void:
 
 	# Confederate (AI) — left side
 	# Cavalry=front (closest to center), Infantry=middle, Artillery=rear (near edge)
-	var c_cavalry = spawn_unit(CAVALRY_SCENE, $ConfederateArmy, Vector2(CONF_X + 2 * SPACING, CENTER_Y - SPACING), "confederate")
-	var c_infantry = spawn_unit(INFANTRY_SCENE, $ConfederateArmy, Vector2(CONF_X + SPACING, CENTER_Y), "confederate")
-	var c_artillery = spawn_unit(ARTILLERY_SCENE, $ConfederateArmy, Vector2(CONF_X, CENTER_Y + SPACING), "confederate")
+	var c_cavalry = spawn_unit(CONF_CAVALRY_SCENE, $ConfederateArmy, Vector2(CONF_X + 2 * SPACING, CENTER_Y - SPACING), "confederate")
+	var c_infantry = spawn_unit(CONF_INFANTRY_SCENE, $ConfederateArmy, Vector2(CONF_X + SPACING, CENTER_Y), "confederate")
+	var c_artillery = spawn_unit(CONF_ARTILLERY_SCENE, $ConfederateArmy, Vector2(CONF_X, CENTER_Y + SPACING), "confederate")
 
 	enemy_units.append(c_infantry)
 	enemy_units.append(c_cavalry)
 	enemy_units.append(c_artillery)
-
-	# Color confederate units red
-	for unit in enemy_units:
-		unit.get_node("Sprite").color = Color(0.8, 0.2, 0.2, 1)
 
 	# Setup game manager
 	game_manager.setup_game(player_units, enemy_units)
