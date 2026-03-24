@@ -2,7 +2,7 @@
 
 A real-time tactical battle game built with Godot 4.4. Command Union forces against Confederate AI in strategic warfare.
 
-**[🎮 Play Now on GitHub Pages](https://freaxnx01.github.io/civil-war-battlefield/)**
+**[🎮 Play Now on GitHub Pages](https://locutusaibot-blip.github.io/civil-war-battlefield/)**
 
 ---
 
